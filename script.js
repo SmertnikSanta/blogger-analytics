@@ -15,7 +15,7 @@ function createBloggerForm(index) {
         <div class="blogger-header">
             <div class="header-left">
                 <span class="toggle-icon" onclick="toggleBlogger(this)">▼</span>
-                <span class="blogger-title">📱 Блогер ${index}</span>
+                <span class="blogger-title" id="title-${index}">📱 Блогер ${index}</span>
             </div>
             <div class="header-right">
                 <span class="collapse-status">свернуть</span>
@@ -26,7 +26,7 @@ function createBloggerForm(index) {
         <div class="blogger-content">
             <div class="input-group">
                 <label>Имя блогера:</label>
-                <input type="text" class="blogger-name" placeholder="Например: Анечка" value="Блогер ${index}">
+                <input type="text" class="blogger-name" data-index="${index}" placeholder="Например: Анечка" value="Блогер ${index}" oninput="updateBloggerTitle(this)">
             </div>
             
             <div class="input-group">
@@ -79,7 +79,7 @@ function createBloggerForm(index) {
     return form;
 }
 
-// Функция для создания 10 полей ввода (упрощенная)
+// Функция для создания 10 полей ввода
 function createArrayInputs(type, index) {
     let html = '';
     for (let i = 0; i < MAX_VALUES; i++) {
@@ -91,6 +91,19 @@ function createArrayInputs(type, index) {
         `;
     }
     return html;
+}
+
+// НОВАЯ ФУНКЦИЯ: обновление заголовка блогера
+function updateBloggerTitle(input) {
+    const index = input.dataset.index;
+    const title = document.getElementById(`title-${index}`);
+    const newName = input.value.trim();
+    
+    if (newName) {
+        title.textContent = `📱 ${newName}`;
+    } else {
+        title.textContent = `📱 Блогер ${index}`;
+    }
 }
 
 // Функция для сворачивания/разворачивания блогера
@@ -169,7 +182,8 @@ function updateCounter() {
 // Функция для сбора данных из формы
 function collectBloggerData(form) {
     const index = form.dataset.index;
-    const name = form.querySelector('.blogger-name').value || `Блогер ${index}`;
+    const nameInput = form.querySelector('.blogger-name');
+    const name = nameInput.value.trim() || `Блогер ${index}`;
     const subscribers = parseInt(form.querySelector('.subscribers').value) || 0;
     
     // Функция для сбора массива значений
@@ -318,3 +332,4 @@ window.removeBlogger = removeBlogger;
 window.toggleBlogger = toggleBlogger;
 window.collapseAll = collapseAll;
 window.expandAll = expandAll;
+window.updateBloggerTitle = updateBloggerTitle;
