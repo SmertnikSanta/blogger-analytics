@@ -1,0 +1,446 @@
+/* Импорт современного шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Запрещаем выделение текста везде */
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Разрешаем выделение ТОЛЬКО в полях ввода */
+input, 
+textarea {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+/* Лейблы НЕ должны выделяться - это просто подписи */
+label {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+}
+
+/* Значения в результатах можно выделять для копирования */
+.result-item .name,
+.result-item p {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    cursor: text;
+}
+
+/* Счетчик блогеров можно выделять */
+.counter span {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+body {
+    background: #0B0829;
+    min-height: 100vh;
+    padding: 20px;
+    color: #F9DFC6;
+    cursor: default;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(11, 8, 41, 0.95);
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(143, 160, 216, 0.15);
+}
+
+h1 {
+    text-align: center;
+    color: #F9DFC6;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    position: relative;
+    cursor: default;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: #FF8400;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.2px;
+    user-select: none;
+}
+
+.btn-primary {
+    background: #FF8400;
+    color: #0B0829;
+    border: 1px solid rgba(255, 132, 0, 0.5);
+}
+
+.btn-primary:hover {
+    background: #ff9633;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 132, 0, 0.3);
+}
+
+.btn-success {
+    background: #8FA0D8;
+    color: #0B0829;
+    border: 1px solid rgba(143, 160, 216, 0.5);
+}
+
+.btn-success:hover {
+    background: #a5b3e3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(143, 160, 216, 0.3);
+}
+
+.btn-danger {
+    background: transparent;
+    color: #F9DFC6;
+    border: 1px solid rgba(255, 132, 0, 0.2);
+}
+
+.btn-danger:hover {
+    background: rgba(255, 132, 0, 0.1);
+    border-color: #FF8400;
+}
+
+.counter {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 13px;
+    color: #F9DFC6;
+    opacity: 0.7;
+    background: rgba(255, 132, 0, 0.08);
+    padding: 5px 15px;
+    border-radius: 30px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    border: 1px solid rgba(255, 132, 0, 0.15);
+}
+
+.counter span {
+    font-weight: 600;
+    color: #FF8400;
+    margin: 0 4px;
+}
+
+.blogger-card {
+    background: rgba(11, 8, 41, 0.8);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(143, 160, 216, 0.15);
+    transition: all 0.2s ease;
+}
+
+.blogger-card:hover {
+    border-color: #FF8400;
+    box-shadow: 0 5px 15px rgba(255, 132, 0, 0.1);
+}
+
+.blogger-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #F9DFC6;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 132, 0, 0.2);
+    cursor: default;
+    user-select: none;
+}
+
+.remove-btn {
+    background: rgba(255, 132, 0, 0.1);
+    color: #F9DFC6;
+    border: 1px solid rgba(255, 132, 0, 0.2);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.remove-btn:hover {
+    background: #FF8400;
+    color: #0B0829;
+    border-color: #FF8400;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #8FA0D8;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    cursor: default;
+    user-select: none;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid rgba(143, 160, 216, 0.2);
+    border-radius: 16px;
+    font-size: 13px;
+    transition: all 0.2s ease;
+    background: rgba(11, 8, 41, 0.6);
+    color: #F9DFC6;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #FF8400;
+    background: rgba(11, 8, 41, 0.8);
+}
+
+.array-inputs {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.array-input {
+    flex: 1;
+    min-width: 60px;
+}
+
+.array-input input {
+    text-align: center;
+    padding: 8px 2px;
+    font-size: 12px;
+    background: rgba(11, 8, 41, 0.8);
+}
+
+.input-help {
+    font-size: 10px;
+    color: rgba(249, 223, 198, 0.4);
+    margin-top: 4px;
+    font-style: italic;
+    cursor: default;
+    user-select: none;
+}
+
+.optional {
+    background: rgba(143, 160, 216, 0.03);
+    border-radius: 16px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px dashed rgba(255, 132, 0, 0.2);
+}
+
+.optional-badge {
+    background: rgba(255, 132, 0, 0.1);
+    color: #FF8400;
+    padding: 2px 8px;
+    border-radius: 30px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: inline-block;
+    margin-left: 8px;
+    border: 1px solid rgba(255, 132, 0, 0.2);
+    user-select: none;
+}
+
+.results {
+    margin-top: 30px;
+    padding: 25px;
+    background: rgba(11, 8, 41, 0.9);
+    border-radius: 20px;
+    color: #F9DFC6;
+    display: none;
+    border: 1px solid rgba(255, 132, 0, 0.2);
+}
+
+.results.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.results h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: #F9DFC6;
+    letter-spacing: -0.02em;
+    cursor: default;
+    user-select: none;
+}
+
+.result-item {
+    background: rgba(11, 8, 41, 0.6);
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(143, 160, 216, 0.15);
+    transition: all 0.2s ease;
+}
+
+.result-item:hover {
+    border-color: #FF8400;
+}
+
+.result-item p {
+    margin: 5px 0;
+    font-size: 13px;
+    color: #F9DFC6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.result-item .name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #8FA0D8;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 132, 0, 0.15);
+}
+
+.warning {
+    background: rgba(255, 132, 0, 0.08);
+    color: #FF8400;
+    padding: 12px 16px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 132, 0, 0.2);
+    font-size: 12px;
+    line-height: 1.5;
+    user-select: none;
+}
+
+/* Компактный скроллбар */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0B0829;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FF8400;
+    border-radius: 10px;
+    opacity: 0.5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8FA0D8;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    .blogger-card {
+        padding: 15px;
+    }
+    
+    .array-inputs {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .array-input {
+        min-width: 100%;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
+        width: 100%;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+}
+
+/* Убираем стрелки у number input */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}

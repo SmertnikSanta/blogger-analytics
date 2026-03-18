@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нет соединения</title>
+    <style>
+        body {
+            background: #0B0829;
+            color: #F9DFC6;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+        .offline-container {
+            max-width: 400px;
+        }
+        h1 {
+            color: #FF8400;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+        .btn {
+            background: #FF8400;
+            color: #0B0829;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background: #ff9633;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <h1>📱 Нет соединения</h1>
+        <p>Приложение работает в офлайн-режиме. Проверьте подключение к интернету, чтобы загрузить новые данные.</p>
+        <button class="btn" onclick="window.location.reload()">Попробовать снова</button>
+    </div>
+</body>
+</html>

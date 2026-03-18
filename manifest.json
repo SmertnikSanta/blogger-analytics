@@ -1,0 +1,19 @@
+{
+  "name": "Аналитика блогеров",
+  "short_name": "BlogStats",
+  "description": "Калькулятор метрик вовлеченности для блогеров",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0B0829",
+  "theme_color": "#FF8400",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

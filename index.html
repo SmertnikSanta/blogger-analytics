@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- PWA Meta теги -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#FF8400">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BlogStats">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Иконки для iOS -->
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="/icons/icon-152.png">
+    
+    <!-- Заглушка для загрузки -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>Аналитика блогеров</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор метрик блогеров</h1>
+        
+        <div class="controls">
+            <button id="addBloggerBtn" class="btn btn-primary">Добавить блогера</button>
+            <button id="calculateBtn" class="btn btn-success">Рассчитать все</button>
+            <button id="resetBtn" class="btn btn-danger">Очистить все</button>
+        </div>
+        
+        <div class="counter">
+            Блогеров добавлено: <span id="bloggerCount">1</span> / 40
+        </div>
+        
+        <div id="bloggersContainer"></div>
+        
+        <div id="results" class="results"></div>
+
+        <div id="offlineIndicator" style="display: none; position: fixed; top: 10px; left: 10px; background: #FF8400; color: #0B0829; padding: 5px 10px; border-radius: 20px; font-size: 12px; z-index: 1000;">📴 Офлайн</div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
