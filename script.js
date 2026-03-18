@@ -13,66 +13,74 @@ function createBloggerForm(index) {
     
     form.innerHTML = `
         <div class="blogger-header">
-            <span>📱 Блогер ${index}</span>
-            ${index > 1 ? '<button class="remove-btn" onclick="removeBlogger(this)">✕</button>' : ''}
-        </div>
-        
-        <div class="input-group">
-            <label>Имя блогера:</label>
-            <input type="text" class="blogger-name" placeholder="Например: Анечка" value="Блогер ${index}">
-        </div>
-        
-        <div class="input-group">
-            <label>Подписчики (одно число):</label>
-            <input type="number" class="subscribers" min="1" step="1" placeholder="Например: 21000" required>
-        </div>
-        
-        <div class="input-group">
-            <label>Просмотры за 10 постов:</label>
-            <div class="array-inputs" id="views-${index}">
-                ${createArrayInputs('views', index, 'Например: 301110')}
+            <div class="header-left">
+                <span class="toggle-icon" onclick="toggleBlogger(this)">▼</span>
+                <span class="blogger-title">📱 Блогер ${index}</span>
             </div>
-            <div class="input-help">Введите до 10 чисел (можно меньше, остальные будут 0)</div>
+            <div class="header-right">
+                <span class="collapse-status">свернуть</span>
+                ${index > 1 ? '<button class="remove-btn" onclick="removeBlogger(this)">✕</button>' : ''}
+            </div>
         </div>
         
-        <div class="input-group">
-            <label>Лайки за 10 постов:</label>
-            <div class="array-inputs" id="likes-${index}">
-                ${createArrayInputs('likes', index, 'Например: 906')}
+        <div class="blogger-content">
+            <div class="input-group">
+                <label>Имя блогера:</label>
+                <input type="text" class="blogger-name" placeholder="Например: Анечка" value="Блогер ${index}">
             </div>
-            <div class="input-help">Введите до 10 чисел (можно меньше, остальные будут 0)</div>
-        </div>
-        
-        <div class="input-group">
-            <label>Комментарии за 10 постов:</label>
-            <div class="array-inputs" id="comments-${index}">
-                ${createArrayInputs('comments', index, 'Например: 4')}
+            
+            <div class="input-group">
+                <label>Подписчики (одно число):</label>
+                <input type="number" class="subscribers" min="1" step="1" placeholder="Например: 21000" required>
             </div>
-            <div class="input-help">Введите до 10 чисел (можно меньше, остальные будут 0)</div>
-        </div>
+            
+            <div class="input-group">
+                <label>Просмотры за 10 постов:</label>
+                <div class="array-inputs" id="views-${index}">
+                    ${createArrayInputs('views', index)}
+                </div>
+                <div class="input-help">Введите до 10 чисел</div>
+            </div>
+            
+            <div class="input-group">
+                <label>Лайки за 10 постов:</label>
+                <div class="array-inputs" id="likes-${index}">
+                    ${createArrayInputs('likes', index)}
+                </div>
+                <div class="input-help">Введите до 10 чисел</div>
+            </div>
+            
+            <div class="input-group">
+                <label>Комментарии за 10 постов:</label>
+                <div class="array-inputs" id="comments-${index}">
+                    ${createArrayInputs('comments', index)}
+                </div>
+                <div class="input-help">Введите до 10 чисел</div>
+            </div>
 
-        <div class="input-group optional">
-            <label>Шеры (репосты в stories/telegram) <span class="optional-badge">не обязательно</span>:</label>
-            <div class="array-inputs" id="shares-${index}">
-                ${createArrayInputs('shares', index, 'Например: 5')}
+            <div class="input-group optional">
+                <label>Шеры <span class="optional-badge">не обязательно</span>:</label>
+                <div class="array-inputs" id="shares-${index}">
+                    ${createArrayInputs('shares', index)}
+                </div>
+                <div class="input-help">До 10 чисел (можно оставить пустыми)</div>
             </div>
-            <div class="input-help">Введите до 10 чисел (можно оставить пустыми если не используется)</div>
-        </div>
-        
-        <div class="input-group">
-            <label>Репосты за 10 постов:</label>
-            <div class="array-inputs" id="reposts-${index}">
-                ${createArrayInputs('reposts', index, 'Например: 6')}
+            
+            <div class="input-group">
+                <label>Репосты за 10 постов:</label>
+                <div class="array-inputs" id="reposts-${index}">
+                    ${createArrayInputs('reposts', index)}
+                </div>
+                <div class="input-help">Введите до 10 чисел</div>
             </div>
-            <div class="input-help">Введите до 10 чисел (можно меньше, остальные будут 0)</div>
         </div>
     `;
     
     return form;
 }
 
-// Функция для создания 10 полей ввода
-function createArrayInputs(type, index, placeholder) {
+// Функция для создания 10 полей ввода (упрощенная)
+function createArrayInputs(type, index) {
     let html = '';
     for (let i = 0; i < MAX_VALUES; i++) {
         html += `
@@ -85,61 +93,105 @@ function createArrayInputs(type, index, placeholder) {
     return html;
 }
 
+// Функция для сворачивания/разворачивания блогера
+function toggleBlogger(icon) {
+    const bloggerCard = icon.closest('.blogger-card');
+    const content = bloggerCard.querySelector('.blogger-content');
+    const status = bloggerCard.querySelector('.collapse-status');
+    
+    if (content.style.display === 'none') {
+        // Разворачиваем
+        content.style.display = 'block';
+        icon.textContent = '▼';
+        status.textContent = 'свернуть';
+    } else {
+        // Сворачиваем
+        content.style.display = 'none';
+        icon.textContent = '▶';
+        status.textContent = 'развернуть';
+    }
+}
+
+// Функция для сворачивания всех блогеров
+function collapseAll() {
+    const icons = document.querySelectorAll('.toggle-icon');
+    icons.forEach(icon => {
+        const bloggerCard = icon.closest('.blogger-card');
+        const content = bloggerCard.querySelector('.blogger-content');
+        const status = bloggerCard.querySelector('.collapse-status');
+        
+        content.style.display = 'none';
+        icon.textContent = '▶';
+        status.textContent = 'развернуть';
+    });
+}
+
+// Функция для разворачивания всех блогеров
+function expandAll() {
+    const icons = document.querySelectorAll('.toggle-icon');
+    icons.forEach(icon => {
+        const bloggerCard = icon.closest('.blogger-card');
+        const content = bloggerCard.querySelector('.blogger-content');
+        const status = bloggerCard.querySelector('.collapse-status');
+        
+        content.style.display = 'block';
+        icon.textContent = '▼';
+        status.textContent = 'свернуть';
+    });
+}
+
+// Функция для добавления блогера
+function addBlogger() {
+    if (bloggerCount >= MAX_BLOGGERS) {
+        alert(`Достигнуто максимальное количество блогеров (${MAX_BLOGGERS})`);
+        return;
+    }
+    
+    bloggerCount++;
+    const container = document.getElementById('bloggersContainer');
+    container.appendChild(createBloggerForm(bloggerCount));
+    updateCounter();
+}
+
+// Функция для удаления блогера
+function removeBlogger(btn) {
+    const card = btn.closest('.blogger-card');
+    card.remove();
+    bloggerCount--;
+    updateCounter();
+}
+
+// Функция для обновления счетчика
+function updateCounter() {
+    document.getElementById('bloggerCount').textContent = bloggerCount;
+}
+
 // Функция для сбора данных из формы
 function collectBloggerData(form) {
     const index = form.dataset.index;
     const name = form.querySelector('.blogger-name').value || `Блогер ${index}`;
     const subscribers = parseInt(form.querySelector('.subscribers').value) || 0;
     
-    // Собираем просмотры
-    const views = [];
-    for (let i = 0; i < MAX_VALUES; i++) {
-        const input = form.querySelector(`.views-${index}[data-index="${i}"]`);
-        const value = input ? parseInt(input.value) : 0;
-        views.push(isNaN(value) ? 0 : value);
-    }
-    
-    // Собираем лайки
-    const likes = [];
-    for (let i = 0; i < MAX_VALUES; i++) {
-        const input = form.querySelector(`.likes-${index}[data-index="${i}"]`);
-        const value = input ? parseInt(input.value) : 0;
-        likes.push(isNaN(value) ? 0 : value);
-    }
-    
-    // Собираем комментарии
-    const comments = [];
-    for (let i = 0; i < MAX_VALUES; i++) {
-        const input = form.querySelector(`.comments-${index}[data-index="${i}"]`);
-        const value = input ? parseInt(input.value) : 0;
-        comments.push(isNaN(value) ? 0 : value);
-    }
-    
-    // Собираем шеры (опционально)
-    const shares = [];
-    for (let i = 0; i < MAX_VALUES; i++) {
-        const input = form.querySelector(`.shares-${index}[data-index="${i}"]`);
-        const value = input ? parseInt(input.value) : 0;
-        shares.push(isNaN(value) ? 0 : value);
-    }
-    
-    // Собираем репосты
-    const reposts = [];
-    for (let i = 0; i < MAX_VALUES; i++) {
-        const input = form.querySelector(`.reposts-${index}[data-index="${i}"]`);
-        const value = input ? parseInt(input.value) : 0;
-        reposts.push(isNaN(value) ? 0 : value);
-    }
+    // Функция для сбора массива значений
+    const collectArray = (className) => {
+        const arr = [];
+        for (let i = 0; i < MAX_VALUES; i++) {
+            const input = form.querySelector(`.${className}-${index}[data-index="${i}"]`);
+            const value = input ? parseInt(input.value) : 0;
+            arr.push(isNaN(value) ? 0 : value);
+        }
+        return arr;
+    };
     
     return {
         bloggerId: parseInt(index),
         bloggerName: name,
         subscribers: subscribers,
-        views: views,
-        likes: likes,
-        comments: comments,
-        shares: shares,
-        reposts: reposts
+        views: collectArray('views'),
+        likes: collectArray('likes'),
+        comments: collectArray('comments'),
+        shares: collectArray('shares'),
+        reposts: collectArray('reposts')
     };
 }
 
@@ -190,44 +242,6 @@ function validateData(bloggersData) {
     return warnings;
 }
 
-// Функция для обновления счетчика
-function updateCounter() {
-    document.getElementById('bloggerCount').textContent = bloggerCount;
-}
-
-// Функция для добавления блогера
-function addBlogger() {
-    if (bloggerCount >= MAX_BLOGGERS) {
-        alert(`Достигнуто максимальное количество блогеров (${MAX_BLOGGERS})`);
-        return;
-    }
-    
-    bloggerCount++;
-    const container = document.getElementById('bloggersContainer');
-    container.appendChild(createBloggerForm(bloggerCount));
-    updateCounter();
-}
-
-// Функция для удаления блогера
-function removeBlogger(btn) {
-    const card = btn.closest('.blogger-card');
-    card.remove();
-    bloggerCount--;
-    updateCounter();
-}
-
-// Функция для сброса всех форм
-function resetAll() {
-    if (confirm('Очистить все данные?')) {
-        const container = document.getElementById('bloggersContainer');
-        container.innerHTML = '';
-        bloggerCount = 1;
-        container.appendChild(createBloggerForm(1));
-        updateCounter();
-        document.getElementById('results').classList.remove('show');
-    }
-}
-
 // Функция для расчета и отображения результатов
 function calculateAndDisplay() {
     const forms = document.querySelectorAll('.blogger-card');
@@ -237,10 +251,8 @@ function calculateAndDisplay() {
         bloggersData.push(collectBloggerData(form));
     });
     
-    // Валидация
     const warnings = validateData(bloggersData);
     
-    // Отображение результатов
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '<h2>📊 РЕЗУЛЬТАТЫ АНАЛИЗА</h2>';
     
@@ -252,8 +264,6 @@ function calculateAndDisplay() {
         const totalViews = sumArray(blogger.views);
         const er = calculateER(blogger);
         const erv = calculateERV(blogger);
-        
-        // Подсчет шеров для информации
         const totalShares = sumArray(blogger.shares);
         
         if (!isNaN(er) && !isNaN(erv) && isFinite(er) && isFinite(erv)) {
@@ -276,9 +286,19 @@ function calculateAndDisplay() {
     });
     
     resultsDiv.classList.add('show');
-    
-    // Прокрутка к результатам
     resultsDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Функция для сброса всех форм
+function resetAll() {
+    if (confirm('Очистить все данные?')) {
+        const container = document.getElementById('bloggersContainer');
+        container.innerHTML = '';
+        bloggerCount = 1;
+        container.appendChild(createBloggerForm(1));
+        updateCounter();
+        document.getElementById('results').classList.remove('show');
+    }
 }
 
 // Инициализация при загрузке страницы
@@ -289,58 +309,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addBloggerBtn').addEventListener('click', addBlogger);
     document.getElementById('calculateBtn').addEventListener('click', calculateAndDisplay);
     document.getElementById('resetBtn').addEventListener('click', resetAll);
+    document.getElementById('collapseAllBtn').addEventListener('click', collapseAll);
+    document.getElementById('expandAllBtn').addEventListener('click', expandAll);
 });
 
-// Делаем функции глобальными для onclick в HTML
+// Делаем функции глобальными
 window.removeBlogger = removeBlogger;
-
-// Регистрация Service Worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('✅ Service Worker зарегистрирован:', registration.scope);
-                
-                // Проверка обновлений
-                registration.addEventListener('updatefound', () => {
-                    const newWorker = registration.installing;
-                    console.log('🔄 Найдено обновление Service Worker');
-                    
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            // Новый Service Worker установлен, показываем уведомление
-                            if (confirm('Доступна новая версия приложения. Обновить?')) {
-                                window.location.reload();
-                            }
-                        }
-                    });
-                });
-            })
-            .catch(error => {
-                console.log('❌ Ошибка регистрации Service Worker:', error);
-            });
-    });
-    
-    // Отслеживание изменений соединения
-    window.addEventListener('online', () => {
-        console.log('📶 Соединение восстановлено');
-        document.getElementById('offlineIndicator').style.display = 'none';
-    });
-    
-    window.addEventListener('offline', () => {
-        console.log('📴 Соединение потеряно');
-        document.getElementById('offlineIndicator').style.display = 'block';
-    });
-} else {
-    console.log('ℹ️ Service Worker не поддерживается браузером');
-}
-
-// Предотвращение случайного закрытия приложения на iOS
-let lastTouchEnd = 0;
-document.addEventListener('touchend', (event) => {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-    }
-    lastTouchEnd = now;
-}, false);
+window.toggleBlogger = toggleBlogger;
+window.collapseAll = collapseAll;
+window.expandAll = expandAll;
