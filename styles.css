@@ -444,3 +444,84 @@ input[type=number] {
     -moz-appearance: textfield;
     appearance: textfield;
 }
+
+/* Стили для сворачивания */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-icon {
+    cursor: pointer;
+    font-size: 14px;
+    color: #FF8400;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.toggle-icon:hover {
+    background: rgba(255, 132, 0, 0.2);
+    transform: scale(1.1);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.collapse-status {
+    font-size: 12px;
+    color: #8FA0D8;
+    opacity: 0.6;
+    font-style: italic;
+}
+
+.blogger-content {
+    transition: all 0.3s ease;
+}
+
+/* Кнопки управления сворачиванием */
+.collapse-controls {
+    display: flex;
+    gap: 10px;
+    margin-left: 15px;
+}
+
+.btn-collapse {
+    background: rgba(143, 160, 216, 0.1);
+    color: #8FA0D8;
+    border: 1px solid rgba(143, 160, 216, 0.2);
+    padding: 5px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-collapse:hover {
+    background: rgba(143, 160, 216, 0.2);
+    border-color: #8FA0D8;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .header-right {
+        gap: 8px;
+    }
+    
+    .collapse-status {
+        font-size: 11px;
+    }
+    
+    .blogger-title {
+        font-size: 14px;
+    }
+}
