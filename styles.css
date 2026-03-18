@@ -445,6 +445,11 @@ input[type=number] {
     appearance: textfield;
 }
 
+/* Плавное обновление заголовка */
+.blogger-title {
+    transition: all 0.2s ease;
+}
+
 /* Стили для сворачивания */
 .header-left {
     display: flex;
